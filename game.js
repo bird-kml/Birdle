@@ -103,19 +103,19 @@ function submitGuess() {
    if (guessBird.name === targetBird.name) {
        gameOver = true;
        if (practiceMode) {
-           showMessage(`🎉 Correct! The bird was ${targetBird.name}! Click "New Game" to play again.`, 'success');
+           showMessage(`Nice, the bird was ${targetBird.name}!`, 'success');
            setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 1500);
        } else {
-           showMessage(`🎉 Correct! The bird was ${targetBird.name}!`, 'success');
+           showMessage(`Nice, the bird was ${targetBird.name}!`, 'success');
            updateStats(true, guesses.length);
        }
    } else if (guesses.length >= maxGuesses) {
        gameOver = true;
        if (practiceMode) {
-           showMessage(`Game Over! The bird was: ${targetBird.name}. Click "New Game" to try again.`, 'error');
+           showMessage(`Oh no, the bird actually was: ${targetBird.name}.`, 'error');
            setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 1500);
        } else {
-           showMessage(`Game Over! The bird was: ${targetBird.name}`, 'error');
+           showMessage(`Oh no, the target bird was: ${targetBird.name}`, 'error');
            updateStats(false, guesses.length);
        }
    } else {
