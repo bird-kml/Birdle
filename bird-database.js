@@ -74,7 +74,7 @@ const BIRD_DATABASE = [
 { name: "Robin", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Nightingale", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Warbler", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Tiny", flight: "Flies", diet: "Omnivore" },
-{ name: "Finches", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
+{ name: "Finch", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Great Tit", type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Canary", type: BIRD_TYPES.PASSERINE, color: "Yellow", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Mockingbird", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Medium", flight: "Flies", diet: "Omnivore" },
