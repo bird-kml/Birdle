@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Birdle - Guess the Bird by Categories</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="container">
+       <header>
+           <h1>🐦 BIRDLE</h1>
+           <p class="subtitle">Guess the bird by its characteristics!</p>
+           <div class="mode-toggle">
+               <button id="mode-btn" onclick="toggleMode()">Switch to Practice Mode</button>
+           </div>
+       </header>
+       <div class="game-info">
+           <div class="info-item">
+               <span class="label">Guesses:</span>
+               <span id="guess-count" class="value">0/6</span>
+           </div>
+           <div class="info-item">
+               <span class="label">Birds in database:</span>
+               <span id="bird-count" class="value">0</span>
+           </div>
+       </div>
+       <div id="game-board" class="game-board">
+           <div class="category-headers">
+               <div class="category-header">Bird</div>
+               <div class="category-header">Type</div>
+               <div class="category-header">Color</div>
+               <div class="category-header">Size</div>
+               <div class="category-header">Flight</div>
+               <div class="category-header">Diet</div>
+           </div>
+       </div>
+       <div class="input-section">
+           <div class="autocomplete-wrapper">
+               <input type="text" id="guess-input" placeholder="Start typing a bird name..." autocomplete="off">
+               <div id="autocomplete-list" class="autocomplete-items"></div>
+           </div>
+           <button id="submit-btn" onclick="submitGuess()">Guess</button>
+       </div>
+       <div id="message" class="message"></div>
+       <div class="legend">
+           <h3>Legend:</h3>
+           <div class="legend-items">
+               <div class="legend-item">
+                   <div class="legend-box correct"></div>
+                   <span>Correct match</span>
+               </div>
+               <div class="legend-item">
+                   <div class="legend-box incorrect"></div>
+                   <span>Wrong</span>
+               </div>
+           </div>
+       </div>
+       <div class="bird-list-section">
+           <button id="toggle-list-btn" onclick="toggleBirdList()">Show All Birds</button>
+           <div id="bird-list" class="bird-list hidden"></div>
+       </div>
+       <div class="controls">
+           <button onclick="showStats()">📊 Stats</button>
+           <button onclick="showHelp()">❓ How to Play</button>
+           <button onclick="showTypesGuide()">🪶 Bird Types</button>
+       </div>
+   </div>
+   <div id="modal" class="modal hidden">
+       <div class="modal-content">
+           <span class="close" onclick="closeModal()">&times;</span>
+           <div id="modal-body"></div>
+       </div>
+   </div>
+   <script src="bird-database.js"></script>
+   <script src="bird-type-guide.js"></script>
+   <script src="game.js"></script>
+</body>
+</html>
+style.css
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+   font-family: 'Arial', sans-serif;
+   background:
+       linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+       url('https://images.unsplash.com/photo-1444464666168-49d633b86797?w=1600&q=80') center/cover no-repeat fixed;
+   min-height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+}
+.container { background: white; border-radius: 16px; padding: 30px; max-width: 900px; width: 100%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+header { text-align: center; margin-bottom: 20px; }
+h1 { font-size: 2.5em; color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; font-size: 0.9em; }
+.mode-toggle { margin-top: 15px; }
+#mode-btn { padding: 8px 20px; background: #667eea; color: white; border: none; border-radius: 20px; font-size: 0.85em; cursor: pointer; transition: all 0.3s ease; }
+#mode-btn:hover { background: #5568d3; transform: scale(1.05); }
+#mode-btn.practice { background: #28a745; }
+#mode-btn.practice:hover { background: #218838; }
+.game-info { display: flex; justify-content: space-around; margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 8px; }
+.info-item { text-align: center; }
+.label { display: block; font-size: 0.8em; color: #666; margin-bottom: 5px; }
+.value { font-size: 1.2em; font-weight: bold; color: #333; }
+.game-board { margin-bottom: 20px; overflow-x: auto; }
+.category-headers { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 8px; margin-bottom: 8px; padding: 0 4px; }
+.category-header { font-size: 0.75em; font-weight: bold; text-transform: uppercase; color: #667eea; text-align: center; padding: 8px 4px; }
+.guess-row { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 8px; margin-bottom: 8px; }
+.guess-row.empty-row { opacity: 0.3; }
+.category-cell { padding: 12px 8px; border-radius: 6px; text-align: center; font-size: 0.85em; font-weight: 500; border: 2px solid #d3d6da; background: white; transition: all 0.3s ease; }
+.category-cell.bird-name { font-weight: bold; font-size: 0.9em; background: #f5f5f5; border-color: #999; }
+.category-cell.correct { background: #6aaa64; color: white; border-color: #6aaa64; }
+.category-cell.incorrect { background: #dc3545; color: white; border-color: #dc3545; }
+.category-cell.empty { background: #fafafa; }
+.input-section { display: flex; gap: 10px; margin-bottom: 15px; }
+.autocomplete-wrapper { flex: 1; position: relative; }
+#guess-input { width: 100%; padding: 12px; font-size: 1em; border: 2px solid #d3d6da; border-radius: 8px; }
+#guess-input:focus { outline: none; border-color: #667eea; }
+.autocomplete-items { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #d3d6da; border-top: none; border-radius: 0 0 8px 8px; max-height: 200px; overflow-y: auto; z-index: 99; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+.autocomplete-item { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
+.autocomplete-item:hover { background: #f0f0f0; }
+.autocomplete-item:last-child { border-bottom: none; }
+#submit-btn { padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; transition: background 0.3s ease; white-space: nowrap; }
+#submit-btn:hover { background: #5568d3; }
+#submit-btn:active { transform: scale(0.98); }
+.message { padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: 500; display: none; }
+.message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.message.info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+.legend { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+.legend h3 { font-size: 0.9em; margin-bottom: 10px; color: #333; }
+.legend-items { display: flex; gap: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85em; }
+.legend-box { width: 30px; height: 30px; border-radius: 4px; }
+.legend-box.correct { background: #6aaa64; }
+.legend-box.incorrect { background: #dc3545; }
+.bird-list-section { margin-bottom: 20px; }
+#toggle-list-btn { width: 100%; padding: 10px; background: #f5f5f5; border: 1px solid #d3d6da; border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: background 0.3s ease; }
+#toggle-list-btn:hover { background: #e5e5e5; }
+.bird-list { margin-top: 10px; padding: 15px; background: #f9f9f9; border-radius: 8px; max-height: 400px; overflow-y: auto; }
+.bird-list.hidden { display: none; }
+.bird-list h3 { margin-bottom: 10px; color: #667eea; }
+.bird-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+.bird-table thead { background: #667eea; color: white; }
+.bird-table th { padding: 10px 8px; text-align: left; font-weight: bold; }
+.bird-table td { padding: 8px; border-bottom: 1px solid #e0e0e0; }
+.bird-table tbody tr:hover { background: #f0f0f0; }
+.controls { display: flex; gap: 10px; }
+.controls button { flex: 1; padding: 10px; background: white; border: 2px solid #667eea; color: #667eea; border-radius: 8px; cursor: pointer; font-size: 0.9em; font-weight: bold; transition: all 0.3s ease; }
+.controls button:hover { background: #667eea; color: white; }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.modal.hidden { display: none; }
+.modal-content { background: white; padding: 30px; border-radius: 16px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+.close { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color 0.3s ease; }
+.close:hover { color: #000; }
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+.stat-item { text-align: center; padding: 20px; background: #f5f5f5; border-radius: 8px; }
+.stat-value { font-size: 2em; font-weight: bold; color: #667eea; }
+.stat-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+.help-content h3 { margin-top: 20px; margin-bottom: 10px; color: #667eea; }
+.help-content ul { margin-left: 20px; margin-bottom: 15px; }
+.help-content li { margin-bottom: 8px; }
+.examples { margin: 20px 0; }
+.example-category { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.example-box { width: 40px; height: 40px; border-radius: 6px; }
+.example-box.correct { background: #6aaa64; }
+.example-box.incorrect { background: #dc3545; }
+@media (max-width: 768px) {
+   .container { padding: 20px; }
+   h1 { font-size: 2em; }
+   .category-headers, .guess-row { grid-template-columns: 1.2fr repeat(5, 0.8fr); gap: 4px; }
+   .category-header { font-size: 0.65em; padding: 6px 2px; }
+   .category-cell { padding: 8px 4px; font-size: 0.75em; }
+   .bird-table { font-size: 0.75em; }
+   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+   .category-header { font-size: 0.6em; padding: 4px 2px; }
+   .category-cell { padding: 6px 2px; font-size: 0.7em; }
+   .input-section { flex-direction: column; }
+   #submit-btn { width: 100%; }
+}
