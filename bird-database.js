@@ -28,7 +28,7 @@ const BIRD_DATABASE = [
 { name: "Gull",            type: BIRD_TYPES.SEABIRD,    color: "White",      size: "Small",  habitat: "Coastal",   diet: "Carnivore" },
 { name: "Seagull",         type: BIRD_TYPES.SEABIRD,    color: "White",      size: "Medium", habitat: "Coastal",   diet: "Omnivore"  },
 { name: "Puffin",          type: BIRD_TYPES.SEABIRD,    color: "Black",      size: "Small",  habitat: "Coastal",   diet: "Carnivore" },
-{ name: "Loon",            type: BIRD_TYPES.SEABIRD,    color: "Black",      size: "Medium", habitat: "Ocean",     diet: "Carnivore" },
+{ name: "Loon",            type: BIRD_TYPES.SEABIRD,    color: "Multicolor",      size: "Medium", habitat: "Wetland",     diet: "Carnivore" },
 
 /* WATERFOWL */
 { name: "Pelican",         type: BIRD_TYPES.WATERFOWL,  color: "White",      size: "Huge",   habitat: "Wetland",   diet: "Carnivore" },
@@ -97,16 +97,16 @@ const BIRD_DATABASE = [
 { name: "Crow",            type: BIRD_TYPES.PASSERINE, color: "Black",      size: "Medium", habitat: "Urban",      diet: "Omnivore"  },
 { name: "Magpie",          type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Medium", habitat: "Urban",      diet: "Omnivore"  },
 { name: "Raven",           type: BIRD_TYPES.PASSERINE, color: "Black",      size: "Large",  habitat: "Mountain",   diet: "Omnivore"  },
-{ name: "Robin",           type: BIRD_TYPES.PASSERINE, color: "Brown",      size: "Medium", habitat: "Forest",     diet: "Omnivore"  },
-{ name: "Nightingale",     type: BIRD_TYPES.PASSERINE, color: "Brown",      size: "Small",  habitat: "Forest",     diet: "Omnivore"  },
+{ name: "Robin",           type: BIRD_TYPES.PASSERINE, color: "Brown",      size: "Small", habitat: "Forest",     diet: "Omnivore"  },
+{ name: "Nightingale",     type: BIRD_TYPES.PASSERINE, color: "Brown",      size: "Small",  habitat: "Grassland",     diet: "Omnivore"  },
 { name: "Warbler",         type: BIRD_TYPES.PASSERINE, color: "Gray",       size: "Tiny",   habitat: "Wetland",    diet: "Omnivore"  },
 { name: "Blue Jay",        type: BIRD_TYPES.PASSERINE, color: "Blue",       size: "Medium", habitat: "Forest",     diet: "Omnivore"  },
 { name: "Great Tit",       type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Small",  habitat: "Forest",     diet: "Omnivore"  },
 { name: "Canary",          type: BIRD_TYPES.PASSERINE, color: "Yellow",     size: "Small",  habitat: "Grassland",  diet: "Omnivore"  },
 { name: "Mockingbird",     type: BIRD_TYPES.PASSERINE, color: "Gray",       size: "Small",  habitat: "Urban",      diet: "Omnivore"  },
 { name: "Starling",        type: BIRD_TYPES.PASSERINE, color: "Black",      size: "Small",  habitat: "Urban",      diet: "Omnivore"  },
-{ name: "Pigeon",          type: BIRD_TYPES.PASSERINE, color: "Gray",       size: "Medium", habitat: "Urban",      diet: "Omnivore"  },
-{ name: "Dove",            type: BIRD_TYPES.PASSERINE, color: "Gray",       size: "Small",  habitat: "Urban",      diet: "Herbivore" },
+{ name: "Pigeon",          type: BIRD_TYPES.NEAR_PASSERINE, color: "Gray",       size: "Medium", habitat: "Urban",      diet: "Omnivore"  },
+{ name: "Dove",            type: BIRD_TYPES.NEAR_PASSERINE, color: "Gray",       size: "Small",  habitat: "Urban",      diet: "Herbivore" },
 { name: "Cock-of-the-rock",type: BIRD_TYPES.PASSERINE, color: "Red",        size: "Medium", habitat: "Rainforest", diet: "Omnivore"  }
 
 ];
