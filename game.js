@@ -137,7 +137,7 @@ function countCorrectCategories(guessBird) {
    if (guessBird.type === targetBird.type) count++;
    if (guessBird.color === targetBird.color) count++;
    if (guessBird.size === targetBird.size) count++;
-   if (guessBird.flight === targetBird.flight) count++;
+   if (guessBird.habitat === targetBird.habitat) count++;
    if (guessBird.diet === targetBird.diet) count++;
    return count;
 }
@@ -160,7 +160,7 @@ function createGuessRow(guessBird) {
    row.appendChild(createCategoryCell(guessBird.type, guessBird.type === targetBird.type));
    row.appendChild(createCategoryCell(guessBird.color, guessBird.color === targetBird.color));
    row.appendChild(createCategoryCell(guessBird.size, guessBird.size === targetBird.size));
-   row.appendChild(createCategoryCell(guessBird.flight, guessBird.flight === targetBird.flight));
+   row.appendChild(createCategoryCell(guessBird.habitat, guessBird.habitat === targetBird.habitat));
    row.appendChild(createCategoryCell(guessBird.diet, guessBird.diet === targetBird.diet));
    return row;
 }
@@ -220,13 +220,13 @@ function setupAutocomplete() {
 function populateBirdList() {
    const listEl = document.getElementById('bird-list');
    let html = '<h3>All Birds in Database</h3><table class="bird-table">';
-   html += '<thead><tr><th>Name</th><th>Type</th><th>Color</th><th>Size</th><th>Flight</th><th>Diet</th></tr></thead><tbody>';
+   html += '<thead><tr><th>Name</th><th>Type</th><th>Color</th><th>Size</th><th>Habitat</th><th>Diet</th></tr></thead><tbody>';
    const sortedBirds = [...BIRD_DATABASE].sort((a, b) => a.name.localeCompare(b.name));
    sortedBirds.forEach(bird => {
        html += `<tr>
            <td><strong>${bird.name}</strong></td>
            <td>${bird.type}</td><td>${bird.color}</td>
-           <td>${bird.size}</td><td>${bird.flight}</td><td>${bird.diet}</td>
+           <td>${bird.size}</td><td>${bird.habitat}</td><td>${bird.diet}</td>
        </tr>`;
    });
    html += '</tbody></table>';
@@ -278,7 +278,7 @@ function showHelp() {
                <li><strong>Type:</strong> ${getCategoryValues().types.join(', ')}</li>
                <li><strong>Color:</strong> ${getCategoryValues().colors.join(', ')}</li>
                <li><strong>Size:</strong> ${getCategoryValues().sizes.join(', ')}</li>
-               <li><strong>Flight:</strong> ${getCategoryValues().flights.join(', ')}</li>
+               <li><strong>Habitat:</strong> ${getCategoryValues().habitats.join(', ')}</li>
                <li><strong>Diet:</strong> ${getCategoryValues().diets.join(', ')}</li>
            </ul>
            <p><strong>A new bird is available each day!</strong></p>
