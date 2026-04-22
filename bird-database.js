@@ -53,7 +53,14 @@ const BIRD_DATABASE = [
 { name: "Lapwing", type: BIRD_TYPES.WADING_BIRD, color: "Green", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Sandpiper", type: BIRD_TYPES.WADING_BIRD, color: "Brown", size: "Tiny", flight: "Flies", diet: "Carnivore" },
 { name: "Phalarope", type: BIRD_TYPES.WADING_BIRD, color: "Gray", size: "Tiny", flight: "Flies", diet: "Omnivore" },
-
+{ 
+  name: "Cinnamon Bittern",
+  type: BIRD_TYPES.WADING_BIRD,
+  color: "Orange",
+  size: "Medium",
+  flight: "Flies",
+  diet: "Carnivore"
+},
 /* RAPTORS */
 { name: "Condor", type: BIRD_TYPES.RAPTOR, color: "Black", size: "Huge", flight: "Flies", diet: "Carnivore" },
 { name: "Vulture", type: BIRD_TYPES.RAPTOR, color: "Brown", size: "Huge", flight: "Flies", diet: "Carnivore" },
