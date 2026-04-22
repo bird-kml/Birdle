@@ -35,9 +35,9 @@ const BIRD_DATABASE = [
 { name: "Swan", type: BIRD_TYPES.WATERFOWL, color: "White", size: "Large", flight: "Flies", diet: "Herbivore" },
 { name: "Goose", type: BIRD_TYPES.WATERFOWL, color: "White", size: "Medium", flight: "Flies", diet: "Herbivore" },
 { name: "Mallard", type: BIRD_TYPES.WATERFOWL, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Omnivore" },
-{ name: "Wood Duck", type: BIRD_TYPES.WATERFOWL, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Omnivore" },
+{ name: "Wood Duck", type: BIRD_TYPES.WATERFOWL, color: "Multicolor", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Eider", type: BIRD_TYPES.WATERFOWL, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Carnivore" },
-{ name: "Pintail", type: BIRD_TYPES.WATERFOWL, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Omnivore" },
+{ name: "Pintail", type: BIRD_TYPES.WATERFOWL, color: "Brown", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Nene", type: BIRD_TYPES.WATERFOWL, color: "Brown", size: "Medium", flight: "Flies", diet: "Herbivore" },
 
 /* WADING */
@@ -65,14 +65,14 @@ const BIRD_DATABASE = [
 { name: "Condor", type: BIRD_TYPES.RAPTOR, color: "Black", size: "Huge", flight: "Flies", diet: "Carnivore" },
 { name: "Vulture", type: BIRD_TYPES.RAPTOR, color: "Brown", size: "Huge", flight: "Flies", diet: "Carnivore" },
 { name: "Eagle", type: BIRD_TYPES.RAPTOR, color: "Multicolor", size: "Large", flight: "Flies", diet: "Carnivore" },
-{ name: "Bald Eagle", type: BIRD_TYPES.RAPTOR, color: "Multicolor", size: "Large", flight: "Flies", diet: "Carnivore" },
+{ name: "Bald Eagle", type: BIRD_TYPES.RAPTOR, color: "White", size: "Large", flight: "Flies", diet: "Carnivore" },
 { name: "Hawk", type: BIRD_TYPES.RAPTOR, color: "Brown", size: "Large", flight: "Flies", diet: "Carnivore" },
 { name: "Falcon", type: BIRD_TYPES.RAPTOR, color: "Gray", size: "Medium", flight: "Flies", diet: "Carnivore" },
-{ name: "Harrier", type: BIRD_TYPES.RAPTOR, color: "Gray", size: "Medium", flight: "Flies", diet: "Carnivore" },
+{ name: "Harrier", type: BIRD_TYPES.RAPTOR, color: "Brown", size: "Medium", flight: "Flies", diet: "Carnivore" },
 { name: "Owl", type: BIRD_TYPES.RAPTOR, color: "Brown", size: "Large", flight: "Flies", diet: "Carnivore" },
 
 /* GAMEBIRDS */
-{ name: "Turkey", type: BIRD_TYPES.GAMEBIRD, color: "Brown", size: "Large", flight: "Flies", diet: "Omnivore" },
+{ name: "Turkey", type: BIRD_TYPES.GAMEBIRD, color: "Multicolor", size: "Large", flight: "Flies", diet: "Omnivore" },
 { name: "Chicken", type: BIRD_TYPES.GAMEBIRD, color: "Brown", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Quail", type: BIRD_TYPES.GAMEBIRD, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Peafowl", type: BIRD_TYPES.GAMEBIRD, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Omnivore" },
@@ -98,10 +98,10 @@ const BIRD_DATABASE = [
 
 /* PASSERINES */
 { name: "Sparrow", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
-{ name: "Finch", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
+{ name: "Finch", type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Snowfinch", type: BIRD_TYPES.PASSERINE, color: "White", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Crow", type: BIRD_TYPES.PASSERINE, color: "Black", size: "Medium", flight: "Flies", diet: "Omnivore" },
-{ name: "Magpie", type: BIRD_TYPES.PASSERINE, color: "Black", size: "Medium", flight: "Flies", diet: "Omnivore" },
+{ name: "Magpie", type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Raven", type: BIRD_TYPES.PASSERINE, color: "Black", size: "Large", flight: "Flies", diet: "Omnivore" },
 { name: "Robin", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Nightingale", type: BIRD_TYPES.PASSERINE, color: "Brown", size: "Small", flight: "Flies", diet: "Omnivore" },
@@ -109,7 +109,7 @@ const BIRD_DATABASE = [
 { name: "Blue Jay", type: BIRD_TYPES.PASSERINE, color: "Blue", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Great Tit", type: BIRD_TYPES.PASSERINE, color: "Multicolor", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Canary", type: BIRD_TYPES.PASSERINE, color: "Yellow", size: "Small", flight: "Flies", diet: "Omnivore" },
-{ name: "Mockingbird", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Medium", flight: "Flies", diet: "Omnivore" },
+{ name: "Mockingbird", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Starling", type: BIRD_TYPES.PASSERINE, color: "Black", size: "Small", flight: "Flies", diet: "Omnivore" },
 { name: "Pigeon", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Medium", flight: "Flies", diet: "Omnivore" },
 { name: "Dove", type: BIRD_TYPES.PASSERINE, color: "Gray", size: "Small", flight: "Flies", diet: "Herbivore" },
