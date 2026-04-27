@@ -72,6 +72,17 @@
            <div id="modal-body"></div>
        </div>
    </div>
+   <div id="win-popup" class="win-popup hidden">
+    <div class="win-popup-content">
+        <span class="close" onclick="closeWinPopup()">&times;</span>
+        <div class="win-popup-inner">
+            <p class="win-label"> You got it!</p>
+            <h2 id="win-bird-name"></h2>
+            <img id="win-bird-img" src="" alt="Bird photo" />
+            <p id="win-guess-count"></p>
+        </div>
+    </div>
+</div>
    <script src="bird-database.js"></script>
    <script src="bird-type-guide.js"></script>
    <script src="game.js"></script>
