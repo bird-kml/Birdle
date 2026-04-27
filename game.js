@@ -54,6 +54,7 @@ function initGame() {
    }
    console.log('Target bird (for testing):', targetBird.name);
    renderBoard();
+   initBirdPreview();
 }
 function toggleMode() {
    practiceMode = !practiceMode;
@@ -72,6 +73,7 @@ function toggleMode() {
    updateModeButton();
    renderBoard();
    updateGuessCount();
+   initBirdPreview();
 }
 function updateModeButton() {
    const btn = document.getElementById('mode-btn');
@@ -102,9 +104,12 @@ function submitGuess() {
    renderBoard();
    updateGuessCount();
    saveGameState();
+   updateBirdPreviewBlur();
    if (guessBird.name === targetBird.name) {
        gameOver = true;
        showWinPopup(targetBird.name);
+       const previewImg = document.getElementById('bird-preview-img');
+       if (previewImg) { previewImg.style.transition = 'filter 0.8s ease'; previewImg.style.filter = 'blur(0px)'; }
        if (practiceMode) {
            setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 3000);
        } else {
@@ -123,6 +128,32 @@ function submitGuess() {
        const correctCategories = countCorrectCategories(guessBird);
        showMessage(`${correctCategories}/5 categories correct. Try again!`, 'info');
    }
+}
+const BLUR_LEVELS = { 0: 20, 1: 15, 2: 9, 3: 6, 4: 3, 5: 0 };
+async function initBirdPreview() {
+   const container = document.getElementById('bird-preview-container');
+   const img = document.getElementById('bird-preview-img');
+   const placeholder = document.getElementById('bird-preview-placeholder');
+   if (!container) return;
+   img.style.display = 'none';
+   placeholder.style.display = 'none';
+   img.style.filter = `blur(${BLUR_LEVELS[0]}px)`;
+   const imageUrl = await fetchBirdImage(targetBird.name);
+   if (imageUrl) {
+       img.src = imageUrl;
+       img.style.display = 'block';
+       placeholder.style.display = 'none';
+   } else {
+       placeholder.style.display = 'flex';
+   }
+}
+function updateBirdPreviewBlur() {
+   const img = document.getElementById('bird-preview-img');
+   if (!img) return;
+   const bestMatch = guesses.reduce((best, g) => Math.max(best, countCorrectCategories(g)), 0);
+   const blurPx = BLUR_LEVELS[bestMatch] ?? 20;
+   img.style.transition = 'filter 0.6s ease';
+   img.style.filter = `blur(${blurPx}px)`;
 }
 const BIRD_WIKI_TITLES = {
     'Ostrich':           'Common ostrich',
@@ -245,6 +276,7 @@ function startNewPracticeGame() {
    renderBoard();
    updateGuessCount();
    showMessage('New practice game started!', 'info');
+   initBirdPreview();
 }
 function countCorrectCategories(guessBird) {
    let count = 0;
