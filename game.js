@@ -14,6 +14,7 @@ window.toggleMode = toggleMode;
 window.showTypesGuide = showTypesGuide;
 window.closeWinPopup = closeWinPopup;
 window.showAnswer = showAnswer;
+window.startNewPracticeGame = startNewPracticeGame;
 function showTypesGuide() {
    const modal = document.getElementById('modal');
    const modalBody = document.getElementById('modal-body');
@@ -110,20 +111,15 @@ function submitGuess() {
        showWinPopup(targetBird.name);
        const previewImg = document.getElementById('bird-preview-img');
        if (previewImg) { previewImg.style.transition = 'filter 0.8s ease'; previewImg.style.filter = 'blur(0px)'; }
-       if (practiceMode) {
-           setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 3000);
-       } else {
-           updateStats(true, guesses.length);
-       }
+       updateStats(true, guesses.length);
    } else if (guesses.length >= maxGuesses) {
        gameOver = true;
        if (practiceMode) {
            showMessage(`Oh no, the bird actually was: ${targetBird.name}.`, 'error');
-           setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 1500);
        } else {
            showMessage(`Oh no, the target bird was: ${targetBird.name}`, 'error');
-           updateStats(false, guesses.length);
        }
+       updateStats(false, guesses.length);
    } else {
        const correctCategories = countCorrectCategories(guessBird);
        showMessage(`${correctCategories}/5 categories correct. Try again!`, 'info');
@@ -140,6 +136,7 @@ async function initBirdPreview() {
    img.style.filter = `blur(${BLUR_LEVELS[0]}px)`;
    const imageUrl = await fetchBirdImage(targetBird.name);
    if (imageUrl) {
+       img.onload = () => updateBirdPreviewBlur();
        img.src = imageUrl;
        img.style.display = 'block';
        placeholder.style.display = 'none';
@@ -459,6 +456,7 @@ function loadGameState() {
            gameOver = gameState.gameOver;
            renderBoard();
            updateGuessCount();
+           updateBirdPreviewBlur();
            if (gameOver) {
                if (guesses[guesses.length - 1].name === targetBird.name) {
                    showMessage(`You already won today! The bird was: ${targetBird.name}`, 'success');
