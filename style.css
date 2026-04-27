@@ -121,3 +121,22 @@ h1 { font-size: 2.5em; color: #667eea; margin-bottom: 5px; }
 }
 }
 #win-guess-count { font-size: 0.9em; color: #888; margin: 0; }
+.bird-preview-container {
+    margin: 15px auto 0;
+    width: 260px; height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
+    display: flex; align-items: center; justify-content: center;
+}
+#bird-preview-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: blur(20px);
+    transform: scale(1.15); /* hides blur edge artifacts */
+    transition: filter 0.6s ease;
+}
+.bird-preview-placeholder {
+    font-size: 4em; color: #ccc;
+    display: none;
+}
