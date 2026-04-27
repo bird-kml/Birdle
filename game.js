@@ -12,6 +12,7 @@ window.showHelp = showHelp;
 window.closeModal = closeModal;
 window.toggleMode = toggleMode;
 window.showTypesGuide = showTypesGuide;
+window.closeWinPopup = closeWinPopup;
 function showTypesGuide() {
    const modal = document.getElementById('modal');
    const modalBody = document.getElementById('modal-body');
@@ -102,11 +103,10 @@ function submitGuess() {
    saveGameState();
    if (guessBird.name === targetBird.name) {
        gameOver = true;
+       showWinPopup(targetBird.name);
        if (practiceMode) {
-           showMessage(`Nice, the bird was ${targetBird.name}!`, 'success');
-           setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 1500);
+           setTimeout(() => { if (confirm('Play again?')) startNewPracticeGame(); }, 3000);
        } else {
-           showMessage(`Nice, the bird was ${targetBird.name}!`, 'success');
            updateStats(true, guesses.length);
        }
    } else if (guesses.length >= maxGuesses) {
@@ -122,6 +122,35 @@ function submitGuess() {
        const correctCategories = countCorrectCategories(guessBird);
        showMessage(`${correctCategories}/5 categories correct. Try again!`, 'info');
    }
+}
+async function fetchBirdImage(birdName) {
+   try {
+       const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(birdName)}`;
+       const res = await fetch(url);
+       if (!res.ok) return null;
+       const data = await res.json();
+       return data.thumbnail ? data.thumbnail.source : null;
+   } catch {
+       return null;
+   }
+}
+async function showWinPopup(birdName) {
+   const popup = document.getElementById('win-popup');
+   const img = document.getElementById('win-bird-img');
+   const nameEl = document.getElementById('win-bird-name');
+   const guessEl = document.getElementById('win-guess-count');
+   nameEl.textContent = birdName;
+   guessEl.textContent = `Guessed in ${guesses.length} / ${maxGuesses}`;
+   img.style.display = 'none';
+   popup.classList.remove('hidden');
+   const imageUrl = await fetchBirdImage(birdName);
+   if (imageUrl) {
+       img.src = imageUrl;
+       img.style.display = 'block';
+   }
+}
+function closeWinPopup() {
+   document.getElementById('win-popup').classList.add('hidden');
 }
 function startNewPracticeGame() {
    guesses = [];
@@ -336,4 +365,6 @@ function updateStats(won, guessCount) {
 window.onclick = function(event) {
    const modal = document.getElementById('modal');
    if (event.target === modal) closeModal();
+   const winPopup = document.getElementById('win-popup');
+   if (event.target === winPopup) closeWinPopup();
 }
