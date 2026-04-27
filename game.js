@@ -13,6 +13,7 @@ window.closeModal = closeModal;
 window.toggleMode = toggleMode;
 window.showTypesGuide = showTypesGuide;
 window.closeWinPopup = closeWinPopup;
+window.showAnswer = showAnswer;
 function showTypesGuide() {
    const modal = document.getElementById('modal');
    const modalBody = document.getElementById('modal-body');
@@ -313,6 +314,14 @@ function showHelp() {
            <p><strong>A new bird is available each day!</strong></p>
        </div>`;
    modal.classList.remove('hidden');
+}
+function showAnswer() {
+   const password = prompt('Enter password:');
+   if (password === 'birdclub1') {
+       alert(`Today's bird is: ${targetBird.name}`);
+   } else {
+       alert('Wrong password.');
+   }
 }
 function closeModal() {
    document.getElementById('modal').classList.add('hidden');
