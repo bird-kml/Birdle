@@ -126,13 +126,13 @@ function submitGuess() {
 }
 async function fetchBirdImage(birdName) {
    try {
-       const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(birdName)}`;
-       const res = await fetch(url);
+       const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(birdName)}&prop=pageimages&format=json&pithumbsize=600&origin=*`;
+       const res = await fetch(searchUrl);
        if (!res.ok) return null;
        const data = await res.json();
-       if (!data.thumbnail) return null;
-       // Request a larger version by bumping the width in the URL
-       return data.thumbnail.source.replace(/\/\d+px-/, '/600px-');
+       const pages = data.query.pages;
+       const page = Object.values(pages)[0];
+       return page.thumbnail ? page.thumbnail.source : null;
    } catch {
        return null;
    }
