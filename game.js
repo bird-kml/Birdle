@@ -130,7 +130,9 @@ async function fetchBirdImage(birdName) {
        const res = await fetch(url);
        if (!res.ok) return null;
        const data = await res.json();
-       return data.thumbnail ? data.thumbnail.source : null;
+       if (!data.thumbnail) return null;
+       // Request a larger version by bumping the width in the URL
+       return data.thumbnail.source.replace(/\/\d+px-/, '/600px-');
    } catch {
        return null;
    }
